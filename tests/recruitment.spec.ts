@@ -9,19 +9,21 @@ test.beforeEach(async({page}) => {
   await page.getByRole("button", { name: "Login" }).click();
 })
 
-test('recruitment', async ({ page}) =>{
+test('recruitment list', async ({ page}) =>{
 await page.getByRole("link", { name: /Recruitment/i}).click();
 await page.getByRole("link", {name: /Candidates/i}).click();
 await page.waitForURL("**/recruitment/viewCandidates**")
 
 await expect(page.getByRole("table")).toBeVisible();
 
+//To ensure the vacancy and candidate title
 await expect(page.getByRole('columnheader', {name: /Vacancy/i})).toBeVisible();
 await expect(page.getByRole('columnheader', {name: /Candidate/i})).toBeVisible();
 });
 
-test('search', async ({page}) =>{
+test('search functionality', async ({page}) =>{
 
+  //To ensure search functionality correctly
 await page.getByRole("link", { name: /Recruitment/i}).click();
 await page.getByRole("link", {name: /Candidates/i}).click();
 await page.waitForURL("**/recruitment/viewCandidates**");
@@ -37,7 +39,9 @@ const searchBtn = page.getByText('Search');
 await searchBtn.click();
 });
 
-test('create', async ({page}) =>{
+test('add new candidate', async ({page}) =>{
+
+  //create a new candidates
 await page.getByRole("link", { name: /Recruitment/i}).click();
 await page.getByRole("button", {name: /Add/i}).click();
 await page.waitForURL("**/recruitment/addCandidate**");
@@ -58,5 +62,7 @@ const emailInput = page.locator('.oxd-input-group:has(label:has-text("Email")) i
 await emailInput.fill('admin@example.com');
 
 await page.getByRole('button', {name: /Save/i}).click();
+
+
 });
 

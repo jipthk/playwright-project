@@ -42,6 +42,12 @@ await toDateLocator.fill('2026-02-22');
 
 await page.getByRole('button', {name: /Assgin/i}).click();
 
+//Go to myleave check wheather entry has come
+await page.getByRole("link", {name: /My Leave/i}).click();
+await page.waitForURL("**/leave/viewMyLeaveList**")
+
+await expect(page.getByRole('cell', {name:/john doe/i} )).toBeVisible();
+
 });
 
 test('myleave', async ({page})=>{
